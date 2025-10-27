@@ -258,11 +258,7 @@ class FilterManager {
 // Инициализация на странице курсов
 if (window.location.pathname.includes('courses.html')) {
 	document.addEventListener('DOMContentLoaded', () => {
-		if (!AuthManager.checkAuth()) {
-			window.location.href = 'login.html'
-			return
-		}
-
+		// Проверка авторизации убрана, теперь всегда показываем курсы
 		const filterManager = new FilterManager()
 
 		const filtersContainer = document.querySelector('.filters')
