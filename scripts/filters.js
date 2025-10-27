@@ -18,51 +18,45 @@ class FilterManager {
 	}
 
 	loadCourses() {
-		const userData = JSON.parse(localStorage.getItem('userData'))
-
-		if (userData && userData.courses) {
-			this.courses = userData.courses
-		} else {
-			this.courses = [
-				{
-					id: 1,
-					title: 'IT-безопасность',
-					status: 'пройден',
-					start_date: '2024-01-15',
-					due_date: '2025-01-15',
-					progress: 100,
-					description: 'Курс по основам информационной безопасности',
-				},
-				{
-					id: 2,
-					title: 'Работа с Laravel',
-					status: 'в процессе',
-					start_date: '2025-03-01',
-					due_date: '2025-06-01',
-					progress: 45,
-					description: 'Изучение фреймворка Laravel для веб-разработки',
-				},
-				{
-					id: 3,
-					title: 'Основы DevOps',
-					status: 'назначен',
-					start_date: '2025-04-01',
-					due_date: '2025-07-01',
-					progress: 0,
-					description: 'Введение в практики DevOps',
-				},
-				{
-					id: 4,
-					title: 'Управление проектами',
-					status: 'в процессе',
-					start_date: '2025-02-01',
-					due_date: '2025-05-01',
-					progress: 30,
-					description: 'Методологии управления IT-проектами',
-				},
-			]
-		}
-
+		// Теперь всегда используем mock-данные, localStorage не используем.
+		this.courses = [
+			{
+				id: 1,
+				title: 'IT-безопасность',
+				status: 'пройден',
+				start_date: '2024-01-15',
+				due_date: '2025-01-15',
+				progress: 100,
+				description: 'Курс по основам информационной безопасности',
+			},
+			{
+				id: 2,
+				title: 'Работа с Laravel',
+				status: 'в процессе',
+				start_date: '2025-03-01',
+				due_date: '2025-06-01',
+				progress: 45,
+				description: 'Изучение фреймворка Laravel для веб-разработки',
+			},
+			{
+				id: 3,
+				title: 'Основы DevOps',
+				status: 'назначен',
+				start_date: '2025-04-01',
+				due_date: '2025-07-01',
+				progress: 0,
+				description: 'Введение в практики DevOps',
+			},
+			{
+				id: 4,
+				title: 'Управление проектами',
+				status: 'в процессе',
+				start_date: '2025-02-01',
+				due_date: '2025-05-01',
+				progress: 30,
+				description: 'Методологии управления IT-проектами',
+			},
+		]
 		this.filteredCourses = [...this.courses]
 	}
 
