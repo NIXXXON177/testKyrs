@@ -27,7 +27,7 @@ class FilterManager {
 				start_date: '2024-01-15',
 				due_date: '2025-01-15',
 				progress: 100,
-				description: 'Курс по основам информационной безопасности',
+				description: 'Практический вводный курс по основам кибербезопасности, угроз и способов защиты информации на современном предприятии.',
 			},
 			{
 				id: 2,
@@ -36,7 +36,7 @@ class FilterManager {
 				start_date: '2025-03-01',
 				due_date: '2025-06-01',
 				progress: 45,
-				description: 'Изучение фреймворка Laravel для веб-разработки',
+				description: 'Изучение веб-фреймворка Laravel: маршрутизация, работа с БД, Eloquent ORM и создание REST API на практике.',
 			},
 			{
 				id: 3,
@@ -45,7 +45,7 @@ class FilterManager {
 				start_date: '2025-04-01',
 				due_date: '2025-07-01',
 				progress: 0,
-				description: 'Введение в практики DevOps',
+				description: 'Введение в методы DevOps: автоматизация процессов, CI/CD, интеграция разработки и эксплуатации.',
 			},
 			{
 				id: 4,
@@ -54,7 +54,7 @@ class FilterManager {
 				start_date: '2025-02-01',
 				due_date: '2025-05-01',
 				progress: 30,
-				description: 'Методологии управления IT-проектами',
+				description: 'Методологии и инструменты для управления IT-проектами: планирование, контроль, документация, Agile и Waterfall.',
 			},
 		]
 		this.filteredCourses = [...this.courses]

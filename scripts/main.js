@@ -59,7 +59,7 @@ class MainApp {
 						start_date: '2024-01-15',
 						due_date: '2025-01-15',
 						progress: 100,
-						description: 'Курс по основам информационной безопасности',
+						description: 'Практический вводный курс по основам кибербезопасности, угроз и способов защиты информации на современном предприятии.',
 						modules: [
 							{
 								id: 1,
@@ -104,7 +104,7 @@ class MainApp {
 						start_date: '2025-03-01',
 						due_date: '2025-06-01',
 						progress: 45,
-						description: 'Изучение фреймворка Laravel для веб-разработки',
+						description: 'Изучение веб-фреймворка Laravel: маршрутизация, работа с БД, Eloquent ORM и создание REST API на практике.',
 						modules: [
 							{
 								id: 1,
