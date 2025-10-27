@@ -59,45 +59,28 @@
 			</main>
 		</div>
 
-		<script src="../scripts/auth.js"></script>
-
 		<script>
 			document.addEventListener('DOMContentLoaded', function () {
-				// Проверка авторизации
-				if (!AuthManager.checkAuth()) {
-					window.location.href = 'login.html'
-					return
-				}
-
-				// Обновляем имя пользователя
-				const userData = AuthManager.getUserData()
-				if (userData && userData.employee) {
-					const userNameElement = document.getElementById('userName')
-					if (userNameElement) {
-						userNameElement.textContent =
-							userData.employee.name.split(' ')[0] +
-							' ' +
-							userData.employee.name.split(' ')[1]
-					}
+				// Имя пользователя всегда фиксировано
+				const userNameElement = document.getElementById('userName')
+				if (userNameElement) {
+					userNameElement.textContent = 'Петров А.В.'
 				}
 
 				// Загрузка деталей курса
 				loadCourseDetails()
 
-				// Обработчик выхода
+				// Кнопка выхода возвращает на главную
 				const logoutBtn = document.getElementById('logoutBtn')
 				if (logoutBtn) {
 					logoutBtn.addEventListener('click', () => {
-						localStorage.removeItem('authToken')
-						localStorage.removeItem('userData')
-						window.location.href = 'login.html'
+						window.location.href = '../index.html'
 					})
 				}
 
 				// Мобильное меню
 				const navToggle = document.getElementById('navToggle')
 				const navMenu = document.getElementById('navMenu')
-
 				if (navToggle && navMenu) {
 					navToggle.addEventListener('click', () => {
 						navMenu.classList.toggle('active')
@@ -105,7 +88,58 @@
 				}
 			})
 
-			// Глобальные переменные для плеера
+			// Список курсов (mock-данные синхронизированы с filters.js и main.js)
+			const mockCourses = [
+				{
+					id: 1,
+					title: 'IT-безопасность',
+					status: 'пройден',
+					start_date: '2024-01-15',
+					due_date: '2025-01-15',
+					progress: 100,
+					description: 'Практический вводный курс по основам кибербезопасности, угроз и способов защиты информации на современном предприятии.',
+					modules: [
+						{ id: 1, title: 'Введение в IT-безопасность', type: 'text', duration: '15 мин', content: 'Что такое IT-безопасность? Основные угрозы и их виды. Роль IT-специалиста в обеспечении безопасности.' },
+						{ id: 2, title: 'Основные понятия кибербезопасности', type: 'text', duration: '20 мин', content: 'Что такое киберугрозы? Основные угрозы информационной безопасности. Понятие уязвимости и угрозы.' },
+						{ id: 3, title: 'Защита информации на предприятии', type: 'text', duration: '25 мин', content: 'Основные методы защиты информации. Шифрование, аутентификация, аудит.' },
+						{ id: 4, title: 'Практические примеры угроз', type: 'text', duration: '20 мин', content: 'Примеры реальных киберугроз и их последствия. Как защититься от них.' },
+						{ id: 5, title: 'Заключение', type: 'text', duration: '10 мин', content: 'Итоги курса и основные рекомендации по обеспечению безопасности.' }
+					]
+				},
+				{
+					id: 2,
+					title: 'Работа с Laravel',
+					status: 'в процессе',
+					start_date: '2025-03-01',
+					due_date: '2025-06-01',
+					progress: 45,
+					description: 'Изучение веб-фреймворка Laravel: маршрутизация, работа с БД, Eloquent ORM и создание REST API на практике.',
+					modules: [
+						{ id: 1, title: 'Введение в Laravel', type: 'text', duration: '15 мин', content: 'Что такое Laravel? Основные компоненты фреймворка. Установка и настройка.' },
+						{ id: 2, title: 'Маршрутизация и контроллеры', type: 'text', duration: '20 мин', content: 'Основы маршрутизации, создание контроллеров, обработка запросов.' },
+						{ id: 3, title: 'Работа с БД и Eloquent ORM', type: 'text', duration: '25 мин', content: 'Подключение БД, модели данных, работа с Eloquent ORM.' },
+						{ id: 4, title: 'Создание REST API', type: 'text', duration: '20 мин', content: 'Создание API-эндпоинтов, аутентификация, защита данных.' },
+						{ id: 5, title: 'Заключение', type: 'text', duration: '10 мин', content: 'Итоги курса и основные рекомендации по работе с Laravel.' }
+					]
+				},
+				{
+					id: 3,
+					title: 'Основы Python',
+					status: 'назначен',
+					start_date: '2025-07-01',
+					due_date: '2025-10-01',
+					progress: 0,
+					description: 'Изучение языка программирования Python: основы синтаксиса, типы данных, функции и структуры данных.',
+					modules: [
+						{ id: 1, title: 'Введение в Python', type: 'text', duration: '15 мин', content: 'Что такое Python? История создания, преимущества и области применения.' },
+						{ id: 2, title: 'Основы синтаксиса', type: 'text', duration: '20 мин', content: 'Переменные, типы данных, операторы, условные конструкции.' },
+						{ id: 3, title: 'Функции и модули', type: 'text', duration: '25 мин', content: 'Создание функций, работа с модулями, импорт.' },
+						{ id: 4, title: 'Структуры данных', type: 'text', duration: '20 мин', content: 'Списки, словари, множества, кортежи.' },
+						{ id: 5, title: 'Заключение', type: 'text', duration: '10 мин', content: 'Итоги курса и основные рекомендации по изучению Python.' }
+					]
+				}
+			]
+
 			let currentCourse = null
 			let currentModuleIndex = 0
 
@@ -119,18 +153,13 @@
 					return
 				}
 
-				const userData = AuthManager.getUserData()
-				currentCourse = userData?.courses?.find(c => c.id == courseId)
+				currentCourse = mockCourses.find(c => c.id == courseId)
 
 				if (!currentCourse) {
-					showCourseNotFound(
-						container,
-						'Запрошенный курс не существует или у вас нет к нему доступа'
-					)
+					showCourseNotFound(container, 'Запрошенный курс не существует или у вас нет к нему доступа')
 					return
 				}
 
-				// Проверяем, есть ли параметр mode для отображения плеера
 				const mode = urlParams.get('mode')
 				if (mode === 'study') {
 					renderCoursePlayer(container)
@@ -805,12 +834,12 @@
 				currentCourse.modules[moduleIndex].completed = true
 
 				// Обновляем данные в localStorage
-				const userData = JSON.parse(localStorage.getItem('userData'))
-				const courseIndex = userData.courses.findIndex(
-					c => c.id === currentCourse.id
-				)
-				userData.courses[courseIndex] = currentCourse
-				localStorage.setItem('userData', JSON.stringify(userData))
+				// const userData = JSON.parse(localStorage.getItem('userData'))
+				// const courseIndex = userData.courses.findIndex(
+				// 	c => c.id === currentCourse.id
+				// )
+				// userData.courses[courseIndex] = currentCourse
+				// localStorage.setItem('userData', JSON.stringify(userData))
 
 				// Показываем уведомление
 				if (typeof NotificationManager !== 'undefined') {

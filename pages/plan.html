@@ -115,12 +115,6 @@
 
 		<script>
 			document.addEventListener('DOMContentLoaded', function () {
-				// Проверка авторизации
-				if (!AuthManager.checkAuth()) {
-					window.location.href = 'login.html'
-					return
-				}
-
 				// Обновляем имя пользователя
 				const userData = AuthManager.getUserData()
 				if (userData && userData.employee) {
